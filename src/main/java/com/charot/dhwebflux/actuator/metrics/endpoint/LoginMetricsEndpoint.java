@@ -1,8 +1,7 @@
-package com.charot.dhwebflux.actuator.metrics;
+package com.charot.dhwebflux.actuator.metrics.endpoint;
 
 import com.charot.dhwebflux.actuator.metrics.dto.LoginMetricsDto;
 import com.charot.dhwebflux.actuator.metrics.security.LoginMetrics;
-import io.micrometer.core.instrument.MeterRegistry;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;

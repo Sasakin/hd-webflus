@@ -1,4 +1,4 @@
-package com.charot.dhwebflux.actuator.metrics;
+package com.charot.dhwebflux.actuator.metrics.endpoint;
 
 import com.charot.dhwebflux.repository.UserRepository;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 @Component
 @Endpoint(id = "user-metrics")
 @AllArgsConstructor
-public class UserMetrics {
+public class UserMetricsEndpoint {
     private final MeterRegistry meterRegistry;
 
     private final UserRepository userRepository;

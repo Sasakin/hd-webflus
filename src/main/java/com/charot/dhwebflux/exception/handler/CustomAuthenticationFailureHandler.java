@@ -1,5 +1,8 @@
 package com.charot.dhwebflux.exception.handler;
 
+import com.charot.dhwebflux.actuator.metrics.dto.AuthEventDto;
+import com.charot.dhwebflux.actuator.metrics.dto.AuthResultType;
+import com.charot.dhwebflux.actuator.metrics.kafka.AuthEventProducer;
 import com.charot.dhwebflux.actuator.metrics.security.LoginMetrics;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.AuthenticationException;
@@ -15,10 +18,14 @@ public class CustomAuthenticationFailureHandler  implements ServerAuthentication
 
     private final LoginMetrics metrics;
 
+    private final AuthEventProducer producer;
+
     @Override
     public Mono<Void> onAuthenticationFailure(WebFilterExchange webFilterExchange, AuthenticationException exception) {
         ServerWebExchange exchange = webFilterExchange.getExchange();
         metrics.incrementFailedLogin();
+
+        producer.sendAuthEvent(new AuthEventDto(AuthResultType.FAILED, "", exception.getMessage()));
         return exchange.getResponse().setComplete();
     }
 

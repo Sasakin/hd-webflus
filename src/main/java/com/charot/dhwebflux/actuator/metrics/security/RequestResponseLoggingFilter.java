@@ -3,10 +3,7 @@ package com.charot.dhwebflux.actuator.metrics.security;
 import com.charot.dhwebflux.actuator.metrics.repository.RequestResponseLog;
 import com.charot.dhwebflux.actuator.metrics.repository.RequestResponseLogRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
@@ -23,8 +20,6 @@ import java.util.UUID;
 public class RequestResponseLoggingFilter implements WebFilter {
 
     private RequestResponseLogRepository repository;
-
-    private ObjectMapper mapper;
 
     //@Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {

@@ -1,4 +1,4 @@
-package com.charot.dhwebflux.actuator.metrics;
+package com.charot.dhwebflux.actuator.metrics.endpoint;
 
 import com.charot.dhwebflux.actuator.metrics.dto.RequestResponseDto;
 import com.charot.dhwebflux.actuator.metrics.repository.RequestResponseLog;

@@ -7,6 +7,7 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=userAdmin
       - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=testdb
     ports:
       - "27017:27017"
     healthcheck:
@@ -14,3 +15,28 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=2181
+      - ZOOKEEPER_TICK_TIME=2000
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    hostname: kafka
+    ports:
+      - "9093:9093"
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9093
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9093
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
+      - KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS=0
