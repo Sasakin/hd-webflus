@@ -3,8 +3,8 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: testdb
-      username: userAdmin
+      database: admin
+      username: admin
       password: password
   kafka:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -54,6 +54,9 @@ management:
     export:
       prometheus:
         enabled: true
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
   health:
     defaults:
       enabled: true
@@ -66,4 +69,4 @@ logging:
           mongodb:
             core:
               MongoTemplate: DEBUG
-    ROOT: ERROR
+    ROOT: INFO
